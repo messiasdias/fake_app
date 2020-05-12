@@ -15,6 +15,11 @@ let router =  new VueRouter( {
         },
 
         {   
+            path: '/list/:page', 
+            component: List, 
+        },
+
+        {   
             path: '/new', 
             component: Form, 
             alias: '/users/new' ,

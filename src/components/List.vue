@@ -83,32 +83,15 @@ import Pagination from './Pagination'
 export default {
     name : "List",
     components:{ Pagination },
-    mounted: function(){
-        this.$store.dispatch('getUsers')
-
-
-    },
 
     methods:{
     
          statusUser: async function(user) {
-            
-            let response = await this.$store.dispatch(
+            await this.$store.dispatch(
                 'updateUser',
                 { id: user.id,
                  status: (user.status === 'active') ? 'inactive': 'active'}
             )
-           
-            /*if(!response._meta.success){
-                for( let i=0; i < response.result.length; i++ ){
-                  this.form.valid[response.result[i].field] = response.result[i].message
-                }
-                this.form.message = response._meta.message
-            }else{
-                this.form.valid = {}
-                this.form.message = ''
-            } */
-            console.log('Response: ', response, user.status)
         },
 
         editUser: async function(user){

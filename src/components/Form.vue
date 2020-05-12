@@ -104,7 +104,8 @@ export default {
             }else{
                 this.form.valid = {}
                 this.form.message = 'Saved successfully!'
-                this.$store.dispatch('navigation', 'list')  
+                let lastPage = this.$store.state.users.meta.pageCount
+                this.$store.dispatch('navegation', 'list/'+lastPage )
             } 
         }
     }

@@ -36,6 +36,9 @@ export default {
   name: 'App',
   components:{
     Menu
+  },
+  mounted: function(){
+    this.$store.dispatch('getUsers', this.$route.params.page)
   }
 }
 </script>
