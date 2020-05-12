@@ -8,7 +8,8 @@
 
 
         <ul class="right">
-          <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
+          <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>
+          <li><a title="List All" @click.prevent="$store.dispatch('navegation', '/')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
         </ul>
         
       </div>

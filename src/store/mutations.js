@@ -18,6 +18,16 @@ export default{
         }
 
         return state.list;
+    },
+
+    usersListUpdate: function(state,user){
+        let index = state.users.list.indexOf(user);
+        if (index > -1) {
+            for(let i=0; i < user.length; i++ ){
+                state.users.list[index][i] = user[i];
+            }
+        }
+        return state.list;
     }
 
 

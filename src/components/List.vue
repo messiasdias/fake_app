@@ -41,8 +41,8 @@
 
                    
                         <div class="col">
-                            <a @click.prevent="editUser(user)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
-                            <a @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
+                            <a title="Edit User" @click.prevent="editUser(user)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
+                            <a title="Delete User" @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
                         </div>
                     </td>
                 </tr>
@@ -87,11 +87,16 @@ export default {
     methods:{
     
          statusUser: async function(user) {
-            await this.$store.dispatch(
+            let response = await this.$store.dispatch(
                 'updateUser',
                 { id: user.id,
                  status: (user.status === 'active') ? 'inactive': 'active'}
             )
+
+            if(response._meta.success){
+                let userUpdated = await this.$store.dispatch("getUser", user.id )
+                this.$store.commit('usersListUpdate', userUpdated )
+            }
         },
 
         editUser: async function(user){

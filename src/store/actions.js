@@ -52,7 +52,6 @@ export default{
 
     navegation: function(context, navegation){
         context.commit('navegation', navegation)
-        console.log(navegation)
         router.push(navegation)
     },
 

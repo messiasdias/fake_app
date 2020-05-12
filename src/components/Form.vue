@@ -85,7 +85,6 @@ export default {
     mounted: async function(){
         if( this.type == 'update'){
             this.form.data = await this.$store.dispatch("getUser", this.$route.params.id )
-              console.log('user id: ', this.form.data)
         }else{
              this.form.data = {}
         }
@@ -104,8 +103,16 @@ export default {
             }else{
                 this.form.valid = {}
                 this.form.message = 'Saved successfully!'
-                let lastPage = this.$store.state.users.meta.pageCount
-                this.$store.dispatch('navegation', 'list/'+lastPage )
+                let page = '/list';
+
+                if( this.type.toLowerCase() == "create"){
+                    page += '/'+this.$store.state.users.meta.pageCount
+                }else{
+                    this.$store.commit('usersListUpdate', this.form.data )
+                    page +=  '/'+this.$store.state.users.meta.currentPage
+                }
+                console.log(page, this.form.data )
+                this.$store.dispatch('navegation', page )
             } 
         }
     }

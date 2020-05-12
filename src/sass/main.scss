@@ -47,6 +47,7 @@ body{
 }
 
 
+
 .list-avatar{
     width: 50px;
     height: 50px;
@@ -64,6 +65,17 @@ body{
     padding: 0px 20px;
     z-index: 2;
     margin: 0 !important;
+
+    ul{
+        padding: 0 !important;
+         li{
+            padding: 0px !important;
+            a{
+                padding: 0px !important;
+                margin: 0;
+            }
+         }
+    }
 }
 
 
@@ -72,6 +84,11 @@ body{
     margin-top: 60px !important;
     min-width:  100vw !important;
     padding: 0 !important;
+
+
+    h1, h2, h3, h4, h5{
+        color: #ccc;
+    }
 
 
 
@@ -193,7 +210,6 @@ body{
 
 
 .myMenu{
-    //border: solid 1px green;
     position: fixed;
     right: 0;
     width: 80px;
@@ -205,10 +221,9 @@ body{
     flex-direction: column !important;
     background-color: #ccc;
     padding-top: 20px;
-    //z-index: -1 !important;
+
     
     ul  {
-        //border: solid 1px red;
         display: inherit !important;
         flex-direction: column;
         align-items: center !important;
@@ -221,6 +236,7 @@ body{
 
     }
 }
+
 
 .MyCentered{
     width:  100% !important;
@@ -257,4 +273,14 @@ body{
 
 .frowr{
     flex-direction: row-reverse !important;
+}
+
+
+.div100p100 {
+    width: 100vw !important;
+    min-height: 100vh !important; 
+}
+
+.brand-logo{
+    font-size: 1.5em !important;
 }

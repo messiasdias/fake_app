@@ -2,7 +2,7 @@
     <ul class="col s12 pagination" >
             
             <li v-if="(meta.currentPage - 1) >= 1"  class="waves-effect">
-                <a @click.prevent="$store.dispatch('getUsers',1)" >
+                <a title="First" @click.prevent="$store.dispatch('getUsers',1)" >
                 <i class="material-icons">chevron_left</i></a>
             </li>
             
@@ -26,7 +26,7 @@
             
             
             <li v-if="meta.currentPage < meta.pageCount" class="waves-effect">
-                <a @click.prevent="$store.dispatch('getUsers', meta.pageCount)" >
+                <a title="Last" @click.prevent="$store.dispatch('getUsers', meta.pageCount)" >
                     <i class="material-icons">chevron_right</i>
                 </a>
             </li>
