@@ -1,15 +1,22 @@
 <template>
 <div class="row col s12" >
 
+     <div v-if="$store.state.users.list != false" class="list-top">
+          <Pagination />
+    </div>   
+    
     
     <div v-if="$store.state.users.list != false"  class="col s12 l12 table-container" > 
 
-        <Pagination />
+       
         
         <table class="col s12 l8 offset-l2 highlight  table" >
                 <thead>
                 <tr>
                     <th>Profile</th>
+                    <th class="hide-on-large-only">Name</th>
+                    <th class="hide-on-med-and-down">Gender</th>
+                    <th class="hide-on-med-and-down" >Email</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -22,10 +29,22 @@
                     <td > 
                         <div class="chip">
                             <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
-                            {{user.first_name +' ' +user.last_name}}
+                            <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
                         </div>
                     </td>
+
+                     <td class="hide-on-large-only" > 
+                        <p>{{user.first_name}}</p>
+                    </td>
+
                 
+                     <td class="hide-on-med-and-down" > 
+                        <p>{{user.gender}}</p>
+                    </td>
+
+                    <td class="hide-on-med-and-down" > 
+                        <p>{{user.email}}</p>
+                    </td>
 
                     <td class="row actions" > 
                         
@@ -51,7 +70,6 @@
         </table>
 
 
-        <Pagination />
 
     </div>
 
@@ -83,7 +101,15 @@ import Pagination from './Pagination'
 export default {
     name : "List",
     components:{ Pagination },
-
+    mounted: function(){
+        let page = 1 ;
+        if( this.$route.params.page ){
+            page = this.$route.params.page
+        }else{
+            page = this.$store.state.users.meta.currentPage
+        }
+        this.$store.dispatch('getUsers', page)
+    },
     methods:{
     
          statusUser: async function(user) {

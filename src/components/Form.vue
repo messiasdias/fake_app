@@ -49,7 +49,7 @@
 
             <div class="row col s12 MyCentered frow">
                 <button type="button" class="waves-effect waves-light btn-small grey col" 
-                 @click.prevent="$store.dispatch('navegation', '/list')" >Back</button>
+                 @click.prevent="$router.go(-1)" >Back</button>
 
                 <button type="button" class="waves-effect waves-light btn-small col green"
                 @click.prevent="sendForm()" >Save</button>
@@ -92,9 +92,8 @@ export default {
 
     methods: {
         sendForm: async function() {
-
             let response = await this.$store.dispatch(this.type.toLowerCase()+'User', this.form.data)
-
+           
            if(!response._meta.success){
                 for( let i=0; i < response.result.length; i++ ){
                   this.form.valid[response.result[i].field] = response.result[i].message
@@ -103,16 +102,6 @@ export default {
             }else{
                 this.form.valid = {}
                 this.form.message = 'Saved successfully!'
-                let page = '/list';
-
-                if( this.type.toLowerCase() == "create"){
-                    page += '/'+this.$store.state.users.meta.pageCount
-                }else{
-                    this.$store.commit('usersListUpdate', this.form.data )
-                    page +=  '/'+this.$store.state.users.meta.currentPage
-                }
-                console.log(page, this.form.data )
-                this.$store.dispatch('navegation', page )
             } 
         }
     }
