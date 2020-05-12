@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="row">
+
+    <nav class="row col l12 m12 s12 myHeader" >
+      <div class="nav-wrapper">
+
+        <a href="#!" class="brand-logo">Fake App</a>
+
+
+        <ul class="right">
+          <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons right">apps</i></a></li>
+        </ul>
+        
+      </div>
+    </nav>
+
+
+    <div class="row col l12 m12 s12 myMain">
+      <Menu />
+      <router-view class="row col l12 m12 s12" />
+    </div>
+
+    
+
+    <div class="row col myFooter">
+
+
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Menu from './components/Menu'
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    Menu
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -1,0 +1,194 @@
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+$color1: #ee6e73; //accent-2
+$black2: rgba(#000,.3);
+
+
+
+@mixin scrollbar( $tumb1, $tumb2, $trak, $width:5px ) {
+
+    &::-webkit-scrollbar {
+      width: $width ;
+      max-height: 10px !important;
+    }
+
+  &::-webkit-scrollbar-track {
+      background: $trak !important;
+      border-radius: 4px !important;
+    }
+
+  &::-webkit-scrollbar-thumb {
+      background:$tumb1 !important;
+      border-radius: 4px !important;
+    }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background:$tumb2 !important;
+      cursor: pointer !important;
+    }
+
+  }
+
+
+* {
+    padding: 0;
+    margin: 0; 
+    box-sizing: border-box !important;
+}
+
+html{
+    @include scrollbar($color1, $black2, $black2, 5px);
+}
+
+body{
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+}
+
+
+.list-avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.myHeader, .mySidebar, .myContent, .myFooter{
+    //border: solid 1px red !important;
+    box-sizing: border-box !important;
+    //padding: 10px !important;
+}
+
+
+.myHeader {
+    position: fixed;
+    height: 65px !important;
+    padding: 0px 20px;
+    z-index: 2;
+    margin: 0 !important;
+}
+
+
+.myMain{
+
+    margin-top: 60px !important;
+    min-width:  100vw !important;
+    padding: 0 !important;
+
+
+
+     .top{
+
+        position: sticky;
+        background-color: transparent;
+        padding: 20px !important;
+        margin: 0 !important;
+        height: 60px;
+        min-width: 100% !important;
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center;
+        flex-direction: row;
+        z-index: 10;
+        background-color: #fef;
+        z-index: -1;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column !important;
+            height: 140px;
+        }    
+
+        .search{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        //display: none;
+
+    }
+
+    .table-container{
+        margin-top: 55px;
+        //display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+
+        .pagination{
+            padding: 20px ;
+        }
+    }
+
+    .table{
+        //border: solid 1px red;
+        @media screen and (max-width: 768px) {
+            border: solid 1px red;
+            align-self: center;
+        }
+
+        tbody{
+            @include scrollbar($color1, $black2, $black2, 5px);
+            width: 250vh !important;
+        }
+
+        .chip {
+            display: inline-flex;
+            height:  45px !important;
+            justify-content: center;
+            align-items: center;
+
+            img{
+            width: 45px;
+            height: 45px;
+            }
+        }
+
+        .actions{
+            //border: solid 1px red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 5px;
+            a{
+                margin: 5px;
+            }
+
+            div{
+                margin: 5px;
+            }
+        }
+    }
+
+
+
+    .progress-content{
+    
+        min-width: 100vw !important;
+        height: 100vh !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        padding: 60px;
+        box-sizing: border-box !important;
+    }
+
+}
+
+
+.mySidebar{
+    padding: 20px !important;
+    background-color: #eee;
+    min-height: 100vh !important;
+    position: sticky !important;
+    z-index: -1;
+}
+
+.myContent{
+    padding: 0px  !important;
+    background-color: white;
+}
+
+
