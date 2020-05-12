@@ -1,22 +1,19 @@
 <template>
 
-<div v-if="menu" class="row col top hide-on-med-and-dow collapsible" id="top"  >
+<div style="display:none !important; "  class="myMenu"  >
 
-    <div class="col m6 offset-m3 l4 " >
-      
-        <form action="" class="search">
-            <input class="" type="text" name="search" />
-            <button type="button" class="btn-floating btn-small waves-effect waves-light grey lighten-1" ><i class="material-icons">search</i></button>
-        </form>
-    </div> 
-
+    <ul>
+        <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons  sidenav-trigger" data-target="slide-out"  >add</i></a></li>
+        <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons  sidenav-trigger" data-target="slide-out"  >list</i></a> </li>
+    </ul>
    
+</div> 
 
-</div>
 
 </template>
 <script>
 import {mapState} from 'vuex'
+
 export default {
     name: "Menu",
     computed :{
@@ -24,5 +21,6 @@ export default {
             menu: state => state.menu,
         }),
     },
+
 }
 </script>

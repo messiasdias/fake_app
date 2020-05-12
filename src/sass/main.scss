@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+//@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 $color1: #ee6e73; //accent-2
 $black2: rgba(#000,.3);
@@ -54,9 +54,7 @@ body{
 }
 
 .myHeader, .mySidebar, .myContent, .myFooter{
-    //border: solid 1px red !important;
     box-sizing: border-box !important;
-    //padding: 10px !important;
 }
 
 
@@ -104,26 +102,24 @@ body{
             justify-content: center;
         }
 
-        //display: none;
 
     }
 
     .table-container{
         margin-top: 55px;
-        //display: flex;
         justify-content: center;
         align-items: flex-end;
         flex-direction: column;
 
         .pagination{
             padding: 20px ;
+            display: inline-flex;
+            justify-content: flex-end;
         }
     }
 
     .table{
-        //border: solid 1px red;
         @media screen and (max-width: 768px) {
-            border: solid 1px red;
             align-self: center;
         }
 
@@ -144,8 +140,7 @@ body{
             }
         }
 
-        .actions{
-            //border: solid 1px red;
+        .actions {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -156,7 +151,7 @@ body{
             }
 
             div{
-                margin: 5px;
+                margin: 5px !important;
             }
         }
     }
@@ -173,6 +168,11 @@ body{
         align-self: center;
         padding: 60px;
         box-sizing: border-box !important;
+    }
+
+
+    .input-field > .invalid{
+        color: $color1 !important;
     }
 
 }
@@ -192,3 +192,69 @@ body{
 }
 
 
+.myMenu{
+    //border: solid 1px green;
+    position: fixed;
+    right: 0;
+    width: 80px;
+    height: 100vh;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column !important;
+    background-color: #ccc;
+    padding-top: 20px;
+    //z-index: -1 !important;
+    
+    ul  {
+        //border: solid 1px red;
+        display: inherit !important;
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center;
+
+
+        li a {
+            color: white;
+        }
+
+    }
+}
+
+.MyCentered{
+    width:  100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0 !important;
+
+    & > *{
+        margin: 10px;
+    }
+
+    & .circle{
+        max-width: 200px;
+    }
+
+}
+
+
+.fcol{
+    flex-direction: column !important;
+}
+
+.frow{
+    flex-direction: row !important;
+}
+
+
+
+.fcolr{
+    flex-direction: column-reverse !important;
+}
+
+.frowr{
+    flex-direction: row-reverse !important;
+}

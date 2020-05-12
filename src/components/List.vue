@@ -1,12 +1,12 @@
 <template>
-<div class="col" >
+<div class="row col s12" >
 
     
-    <div v-if="$store.state.users != false"  class="col s12 table-container" > 
+    <div v-if="$store.state.users.list != false"  class="col s12 l12 table-container" > 
 
         <Pagination />
         
-        <table class="highlight  centered table" >
+        <table class="col s12 l8 offset-l2 highlight  table" >
                 <thead>
                 <tr>
                     <th>Profile</th>
@@ -17,12 +17,11 @@
                 <tbody>
                 
 
-                <tr v-for="user in $store.state.users" :key="user.id" class="row" >
-
-                        
+                <tr v-for="user in $store.state.users.list" :key="user.id" class="row" >
+                  
                     <td > 
                         <div class="chip">
-                            <img :src="user._links.avatar.href" alt="Contact Person">
+                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
                             {{user.first_name +' ' +user.last_name}}
                         </div>
                     </td>
@@ -34,7 +33,7 @@
                         <div class="switch col">
                             <label>
                             O
-                            <input type="checkbox" :checked="(user.status === 'active') ? true : false" >
+                            <input @change.prevent="statusUser(user)"  type="checkbox" :checked="(user.status === 'active') ? true : false" >
                             <span class="lever"></span>
                             I
                             </label>
@@ -42,8 +41,8 @@
 
                    
                         <div class="col">
-                            <a @click.prevent="alert('Edite!')" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">create</i> </a>
-                            <a @click.prevent="alert('Delete!')" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
+                            <a @click.prevent="editUser(user)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
+                            <a @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
                         </div>
                     </td>
                 </tr>
@@ -86,6 +85,49 @@ export default {
     components:{ Pagination },
     mounted: function(){
         this.$store.dispatch('getUsers')
+
+
     },
+
+    methods:{
+    
+         statusUser: async function(user) {
+            
+            let response = await this.$store.dispatch(
+                'updateUser',
+                { id: user.id,
+                 status: (user.status === 'active') ? 'inactive': 'active'}
+            )
+           
+            /*if(!response._meta.success){
+                for( let i=0; i < response.result.length; i++ ){
+                  this.form.valid[response.result[i].field] = response.result[i].message
+                }
+                this.form.message = response._meta.message
+            }else{
+                this.form.valid = {}
+                this.form.message = ''
+            } */
+            console.log('Response: ', response, user.status)
+        },
+
+        editUser: async function(user){
+           this.$store.dispatch('navegation', '/edit/'+user.id)
+        },
+
+
+        deleteUser: async function(user){
+            let result = confirm("Delete User "+user.first_name+"?") 
+
+            if(result){
+                let response = await this.$store.dispatch('deleteUser',user.id)
+                if(response._meta){
+                    this.$store.commit('usersListRemove', user)
+                }else{
+                    console.log(response._meta.message)
+                }
+            } 
+        }
+    }
 }
 </script>

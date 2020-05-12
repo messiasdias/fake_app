@@ -8,11 +8,12 @@
 
 
         <ul class="right">
-          <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons right">apps</i></a></li>
+          <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
         </ul>
         
       </div>
     </nav>
+
 
 
     <div class="row col l12 m12 s12 myMain">

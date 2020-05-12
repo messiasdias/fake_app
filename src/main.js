@@ -4,6 +4,7 @@ import Store from './store/store'
 import router from './router'
 import App from './App.vue'
 import "./sass/main.scss"
+import "./dom.js"
 
 Vue.use(Vuex)
 let store = new Vuex.Store(Store)

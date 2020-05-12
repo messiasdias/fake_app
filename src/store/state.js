@@ -5,7 +5,12 @@ export default{
     },
 
     navegation: 'list',
-    users: false,
     menu: false,
+    users: {
+        list: false,
+        meta : {},
+        selected: false,
+    },
+ 
         
 }
