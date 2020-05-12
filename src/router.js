@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import List from './components/List.vue'
 import Form from './components/Form.vue'
+import Profile from './components/Profile.vue'
 import NotFound from './components/NotFound.vue'
 
 
@@ -31,6 +32,13 @@ let router =  new VueRouter( {
             component: Form, 
             alias: '/users/edit/:id' ,
             props: { type: 'update'}
+        },
+
+
+        {   
+            path: '/profile/:id', 
+            component: Profile, 
+            alias: '/user/:id' ,
         },
 
 

@@ -95,6 +95,13 @@ body{
         bottom: 30px;
         right: 0px;
         z-index: 10 !important;
+        opacity: .3 !important;
+        transition: all ease-in-out .6s;
+
+        &:hover{
+            transition: all ease-in-out .6s;
+            opacity: 2 !important;
+        }
     }
 
     .table-container{
@@ -134,6 +141,8 @@ body{
             margin: 0 !important;
             padding: 0 !important;
             text-align: center;
+            cursor: pointer;
+            transition: all ease-in-out .8s;
 
             img{
                 width: 40px;
@@ -145,7 +154,14 @@ body{
             p{
                 line-height: 12px !important;
                 margin: 5px 10px;
+                transition: all ease-in-out .8s;
             }
+
+            &:hover{
+                transition: all ease-in-out .8s;
+                background-color: rgba($color1, .3);
+            }
+
         }
 
         .actions {
@@ -274,4 +290,22 @@ body{
 
 .brand-logo{
     font-size: 1.5em !important;
+}
+
+.card-title{
+    font-weight: bold;
+    background-color: $color1;
+    padding: 10px !important;
+    bottom: 10px !important;
+    left: 10px !important;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
+
+.card-title2{
+    @media screen and (min-width: 769px) {
+        display: none;
+    }
 }

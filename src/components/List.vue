@@ -27,13 +27,13 @@
                 <tr v-for="user in $store.state.users.list" :key="user.id" class="row" >
                   
                     <td > 
-                        <div class="chip">
+                        <div class="chip"  @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" >
                             <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
                             <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
                         </div>
                     </td>
 
-                     <td class="hide-on-large-only" > 
+                     <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" > 
                         <p>{{user.first_name}}</p>
                     </td>
 
@@ -60,7 +60,7 @@
 
                    
                         <div class="col">
-                            <a title="Edit User" @click.prevent="editUser(user)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
+                            <a title="Edit User" @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
                             <a title="Delete User" @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
                         </div>
                     </td>
