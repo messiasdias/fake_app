@@ -27,13 +27,13 @@
                 <tr v-for="user in $store.state.users.list" :key="user.id" class="row" >
                   
                     <td > 
-                        <div class="chip"  @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" >
+                        <div class="chip"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" >
                             <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
                             <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
                         </div>
                     </td>
 
-                     <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" > 
+                     <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" > 
                         <p>{{user.first_name}}</p>
                     </td>
 
