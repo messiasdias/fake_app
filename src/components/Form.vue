@@ -7,7 +7,7 @@
 
         <form v-if="type == 'update'" action="" class="MyCentered" >
             <img  class="responsive-img s12 push-s6 circle" 
-            :src="(form.data._links.avatar != null) ? form.data._links.avatar.href : 'img/avatar.png'">
+            :src="form.data._links.avatar ? form.data._links.avatar.href : 'img/avatar-m1.png'">
         </form>
 
 

@@ -28,7 +28,7 @@
                   
                     <td > 
                         <div class="chip"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" >
-                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
+                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png'" alt="Contact Person">
                             <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
                         </div>
                     </td>

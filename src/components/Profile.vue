@@ -10,7 +10,7 @@
             <div class="col s12 offset-m2 m8 l6 offset-l3">
             <div class="card ">
                 <div class="card-image">
-                <img class="circle" :src="user._links.avatar.href">
+                <img class="circle" :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png' ">
                 <span class="card-title"> {{user.first_name}} {{user.last_name}} </span>
                 <a @click.prevent="$store.dispatch('navegation','/edit/'+user.id)" class="btn-floating halfway-fab waves-effect waves-light blue lighten-1"><i class="material-icons">edit</i></a>
                 
