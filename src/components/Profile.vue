@@ -10,14 +10,19 @@
             <div class="col s12 offset-m2 m8 l6 offset-l3">
             <div class="card ">
                 <div class="card-image">
-                <img class="circle" :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png' ">
+                <img class="circle" :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png'">
                 <span class="card-title"> {{user.first_name}} {{user.last_name}} </span>
                 <a @click.prevent="$store.dispatch('navegation','/edit/'+user.id)" class="btn-floating halfway-fab waves-effect waves-light blue lighten-1"><i class="material-icons">edit</i></a>
                 
                 </div>
 
+                    
 
                 <div class="card-content row">
+
+                     <p lass="rigth"> 
+                        <span class="" :class="[user.status == 'active' ? 'badge green  lighten-4'  : 'badge red  lighten-4' ]" > {{user.status}} </span>
+                    </p> 
 
                     <div class="col s6 m6 l6">
 
@@ -47,11 +52,14 @@
 
                     <div class="col s12 m12 l12">
 
-                         <label for="">WebSite</label>
-                         <p>{{user.website}}</p>
+                       
 
                           <label for="">Address</label>
                          <p>{{user.address}}</p>
+
+                         <label for="">WebSite</label>
+                         <p>{{user.website}}</p>  
+                        
                     </div>
 
 
