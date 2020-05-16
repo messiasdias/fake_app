@@ -1,9 +1,4 @@
-//@import "https://fonts.googleapis.com/icon?family=Material+Icons";
-
-$color1: #ee6e73; //accent-2
-$black2: rgba(#000,.3);
-
-
+@import "./materialize-custom.scss";
 
 @mixin scrollbar( $tumb1, $tumb2, $trak, $width:5px ) {
 
@@ -165,7 +160,7 @@ body{
         }
 
         .actions {
-            display: flex;
+            //display: flex;
             justify-content: center;
             align-items: center;
             padding: 0px;

@@ -1,10 +1,7 @@
-import $ from "jquery"
-import "materialize"
+//import materialize from 'materialize-css'
+import $ from 'jquery'
 
-  $(document).ready(function(){
-    $('.fixed-action-btn').floatingActionButton();  
-    $('select').formSelect();
-  });
+$(document).ready(() => {
+   // materialize.AutoInit()
+})
 
-//alert( Math.ceil(Math.random()*2) )
-        

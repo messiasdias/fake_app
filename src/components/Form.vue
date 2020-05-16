@@ -7,7 +7,7 @@
 
         <form v-if="type == 'update'" action="" class="MyCentered" >
             <img  class="responsive-img s12 push-s6 circle" 
-            :src="form.data._links.avatar ? form.data._links.avatar.href : 'img/avatar-m1.png'">
+            :src="stateForm._links.avatar.href">
         </form>
 
 
@@ -31,15 +31,22 @@
             
             <div class="row">
                 <div class="input-field col s12 l6">
-                    <input v-model="form.data.email" type="email" class="validate">
+                    <input v-model="form.data.email" type="email" class="validate" >
                     <label for="email" class="active">Email</label>
                     <small v-if="form.valid.email" class="validate invalid"> {{form.valid.email}} </small>
                 </div>
 
                  <div class="input-field col s12 l6">
-                    <input v-model="form.data.gender" type="text" class="validate">
+
+                    <select v-model="form.data.gender" class="validate" >
+                        <option value="" >Choose your Gender</option>
+                        <option value="male" :selected="form.data.gender == 'male'" >Male</option>
+                        <option value="female" :selected="form.data.gender == 'female'">Female</option>
+                    </select>   
+                    
                     <label for="gender" class="active" >Gender</label>
-                     <small v-if="form.valid.gender" class="validate invalid"> {{form.valid.gender}} </small>
+                    <small v-if="form.valid.gender" class="validate invalid"> {{form.valid.gender}} </small>
+
                 </div>
                 
             </div>
@@ -52,7 +59,7 @@
                  @click.prevent="$router.go(-1)" >Back</button>
 
                 <button type="button" class="waves-effect waves-light btn-small col green"
-                @click.prevent="sendForm()" >Save</button>
+                @click.prevent="$store.dispatch('userCrud',{type:type.toLowerCase(),form:form.data})" >Save</button>
             </div>
 
             
@@ -62,48 +69,42 @@
     </div>
 </template>
 <script>
-
+import materialize from 'materialize-css'
+import {mapState} from 'vuex'
 export default {
     props: {
         type: String
     },
-    name : "Form",
-    data: function() {
+    name: "Form",
+    computed:{
+        ...mapState({
+          stateForm : state => state.user.form.data    
+        })
+    },
+    data: function(){
         return{
            form: {
-               data: {
-                   _links: {
-                       avatar: false
-                   }
-               },
-               valid: {},
-               message: false,
-           }
+                data: {
+                    first_name: '',
+                    last_name: '',
+                    gender: '',
+                    _links: {
+                        avatar: {href: 'img/avatar.png'}
+                    }
+                },
+                valid: false,
+                message: false,
+            }   
         }
     },
-
     mounted: async function(){
+        materialize.AutoInit()
+
         if( this.type == 'update'){
-            this.form.data = await this.$store.dispatch("getUser", this.$route.params.id )
+            this.form.data = await this.$store.dispatch("find", this.$route.params.id )
         }else{
-             this.form.data = {}
+            this.$store.commit("form", {data:{}} )
         }
     },
-
-    methods: {
-        sendForm: async function() {
-            let response = await this.$store.dispatch(this.type.toLowerCase()+'User', this.form.data)
-           
-           if(!response._meta.success){
-                for( let i=0; i < response.result.length; i++ ){
-                  this.form.valid[response.result[i].field] = response.result[i].message
-                }
-                this.form.message = response._meta.message
-            }else{
-                this.form.valid = {}
-                this.form.message = 'Saved successfully!'
-            } 
-        }
-    }
 }
 </script>
