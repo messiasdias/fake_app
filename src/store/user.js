@@ -5,11 +5,7 @@ let state = {
     form: {
         valid: false,
         message: false,
-        data: {
-            _links: {
-                avatar: {href: 'img/avatar.png'}
-            }
-        },
+        data:false
     }   
 }
 
@@ -61,6 +57,7 @@ let actions = {
         if( response.result._links.avatar.href == null  ){
             context.state.form.data._links.avatar.href = 'img/avatar-m1.png'
         }
+
         return response.result
 
     },
@@ -89,34 +86,11 @@ let actions = {
             formdata: crud.form, 
         }) 
 
-    
-        switch(crud.type){
-            case 'create':
-            case 'update':    
-                context.dispatch('updateForm',response)
-            break
-            case 'delete':
-                if(response._meta.success) context.state.form.message = 'Deleted successfully!'
-            break
-        }
-
        return response
 
     },
 
 
-    updateForm: async function(context,response){
-        
-        if(!response._meta.success){
-             for( let i=0; i < response.result.length; i++ ){
-               context.state.form.valid[response.result[i].field] = response.result[i].message
-             }
-            context.state.form.message = response._meta.message
-         }else{
-             context.state.form.valid = {}
-             context.state.form.message = 'Saved successfully!'
-         } 
-    }
 
 
 }

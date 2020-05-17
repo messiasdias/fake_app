@@ -51,5 +51,6 @@ let router =  new VueRouter( {
     ]
 })
 
+
 Vue.use(VueRouter)
 export default router

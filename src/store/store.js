@@ -32,8 +32,10 @@ let mutations = {
 
 let actions = {
     navegation: function(context, navegation){
-        context.commit('navegation', navegation)
-        router.push(navegation)
+        if( navegation != context.state.navegation){
+            router.push(navegation).catch(err => {console.log(err)})
+            context.commit('navegation', navegation)
+        }
     },
 
     ajax: async function(context, config={}){
