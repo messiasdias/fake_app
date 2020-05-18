@@ -1,6 +1,14 @@
 <template>
   <div id="app" class="row">
 
+    <!-- Dropdown Structure -->
+    <ul id="manu-dropdown" class="dropdown-content">
+      <li><a href="#!">Back</a></li>
+      <li class="divider"></li>
+      <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>
+      <li><a title="List All" @click.prevent="$store.dispatch('navegation', '/')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
+    </ul>
+
     <nav class="row col l12 m12 s12 myHeader" >
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo">Fake App</a>
@@ -37,6 +45,5 @@ export default {
   components:{
     Menu
   },
- 
 }
 </script>

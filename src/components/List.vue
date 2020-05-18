@@ -35,12 +35,12 @@
                     </td>
 
                      <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" > 
-                        <p>{{user.first_name}}</p>
+                        <p>{{user.first_name | capitalize }}</p>
                     </td>
 
                 
                      <td class="hide-on-med-and-down" > 
-                        <p>{{user.gender}}</p>
+                        <p>{{user.gender | capitalize }}</p>
                     </td>
 
                     <td class="hide-on-med-and-down" > 
@@ -107,13 +107,10 @@ export default {
     },
 
     mounted: function(){
-        //let page = 'last' ;
-       if( this.$route.params.page ){
-            //page = this.$route.params.page
-        }
-
-        this.$store.dispatch('all') 
+        this.$store.dispatch('all', this.$route.params.page ) 
     },
+
+
     methods:{
     
          statusUser: async function(user) {
@@ -144,10 +141,8 @@ export default {
 
             if(result){
                 let response = await this.$store.dispatch('userCrud', { type:'delete', form:user} )
-                if(response._meta){
+                if(response._meta.success){
                     this.$store.commit('listRemove', user)
-                }else{
-                    console.log(response._meta.message)
                 }
             } 
         }

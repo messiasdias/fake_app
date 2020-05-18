@@ -71,6 +71,7 @@
     </div>
 </template>
 <script>
+import $ from 'jquery'
 import materialize from 'materialize-css'
 import {mapState} from 'vuex'
 export default {
@@ -140,6 +141,14 @@ export default {
                 let interval = setInterval(()=>{
                     let s = (time > 1) ? 's' : ''
                     this.form.validations.message = 'Returning to the previous page in '+time+' second'+s+'...'
+                    
+
+                    $('#app').click(function() {
+                        clearInterval(interval)
+                        this.form.validations.message = ''
+                        console(this)
+                    })
+                 
                     time--
                     if ( time == 0) {    
                         clearInterval(interval)

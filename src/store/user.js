@@ -45,7 +45,7 @@ let actions = {
         let response = await context.dispatch('ajax', {
             url :'/users?page='+getPage
         }) 
-        context.state.list = response.result
+        context.state.list = response.result.reverse()
         context.state.meta = response._meta
     },
 

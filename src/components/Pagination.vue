@@ -29,7 +29,8 @@
                 <a title="Last" @click.prevent="$store.dispatch('all', meta.pageCount)" >
                     <i class="material-icons">chevron_right</i>
                 </a>
-            </li>
+            </li> 
+
     </ul>
 </template>
 <script>
