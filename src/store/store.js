@@ -32,6 +32,11 @@ let mutations = {
 
 let actions = {
     navegation: function(context, navegation){
+
+        if( navegation.toLowerCase() == 'back' ){
+            router.go(-1)
+        }
+
         if( navegation != context.state.navegation){
             router.push(navegation).catch(err => {console.log(err)})
             context.commit('navegation', navegation)

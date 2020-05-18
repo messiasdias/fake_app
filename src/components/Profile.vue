@@ -74,17 +74,23 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex'
+
 export default {
     name : "Profile",
-    computed:{
-        ...mapState({
-            user : state => state.user.form.data
-        })
+    data: function(){
+        return {
+            user: {
+                _links:{
+                    avatar:{
+                        href: ''
+                    }
+                }
+            }
+        }
     },
     mounted: async function(){
         if( this.$route.params.id >= 1 ){
-             await this.$store.dispatch("find", this.$route.params.id )
+             this.user = await this.$store.dispatch("find", this.$route.params.id )
         }else{
              this.form.false
         }

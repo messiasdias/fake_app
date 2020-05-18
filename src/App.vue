@@ -3,9 +3,7 @@
 
     <nav class="row col l12 m12 s12 myHeader" >
       <div class="nav-wrapper">
-
         <a href="#!" class="brand-logo">Fake App</a>
-
 
         <ul class="right">
           <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>

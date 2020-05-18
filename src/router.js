@@ -52,5 +52,15 @@ let router =  new VueRouter( {
 })
 
 
+/*router.beforeEach((to, from, next) => {
+  
+      console.log(to, next)
+      if(to.path == next.path ){
+        next()
+      }
+}) */
+
+
+
 Vue.use(VueRouter)
 export default router

@@ -1,5 +1,6 @@
 @import "./materialize-custom.scss";
 
+
 @mixin scrollbar( $tumb1, $tumb2, $trak, $width:5px ) {
 
     &::-webkit-scrollbar {
@@ -60,6 +61,7 @@ body{
     padding: 0px 20px;
     z-index: 2;
     margin: 0 !important;
+    background: $primary-color !important;
 
     ul{
         padding: 0 !important;
@@ -160,7 +162,7 @@ body{
         }
 
         .actions {
-            //display: flex;
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 0px;
@@ -287,17 +289,7 @@ body{
     font-size: 1.5em !important;
 }
 
-.card-title{
-    font-weight: bold;
-    background-color: $color1;
-    padding: 10px !important;
-    bottom: 10px !important;
-    left: 10px !important;
 
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-}
 
 .card-title2{
     @media screen and (min-width: 769px) {
@@ -305,6 +297,14 @@ body{
     }
 }
 
-.badge, .btn, .card-title{
-    border-radius: 50px;
+
+.myInput-field{
+    @extend .col, .s12, .m8, .offset-m2, .l6, .offset-l3;
+    & > input{
+        @extend .validate;
+    }
+
+    & > small{
+        @extend .validate, .invalid;
+    }
 }

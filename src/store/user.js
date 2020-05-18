@@ -40,9 +40,10 @@ let mutations = {
 //actions
 let actions = {
 
-    all : async function(context, page=0){
+    all : async function(context, page='last'){
+        let getPage = (page == 'last') ?  10101010 : page
         let response = await context.dispatch('ajax', {
-            url : (page >= 1 ) ? '/users?page='+page : '/users' 
+            url :'/users?page='+getPage
         }) 
         context.state.list = response.result
         context.state.meta = response._meta
@@ -53,13 +54,12 @@ let actions = {
             url : '/users/'+id,
         })
 
-        context.state.form.data = {...response.result}
-        if( response.result._links.avatar.href == null  ){
-            context.state.form.data._links.avatar.href = 'img/avatar-m1.png'
-        }
+        if(response.result._links.avatar.href == null){
+            response.result._links.avatar.href = actions.getAvatar(context,response.result.gender)
+        }   
 
+        context.state.form.data = response.result
         return response.result
-
     },
 
     userCrud : async function(context,crud){
@@ -90,6 +90,11 @@ let actions = {
 
     },
 
+    getAvatar: function(context, gender){
+        let g = (gender.indexOf('male') > 0 ) ? "f" : 'm';
+        let n = Math.ceil(Math.random() * 2)
+        return 'img/avatar-'+g+n+'.png'
+    }
 
 
 

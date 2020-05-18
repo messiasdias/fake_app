@@ -6,8 +6,7 @@
         </div>
  
         <form v-if="type == 'update'" action="" class="MyCentered" >
-            <img  class="responsive-img s12 push-s6 circle" 
-            :src="form.data._links.avatar.href">
+            <img  class="responsive-img s12 push-s6 circle" :src="form.data._links.avatar.href">
         </form>
 
 
@@ -16,50 +15,53 @@
             
             <div class="row">
 
-                <div class="input-field col s12 l6">
-                    <input placeholder="" v-model="form.data.first_name" type="text" class="validate" required>
+                <div class="input-field myInput-field">
+                    <input placeholder="" v-model="form.data.first_name" type="text"  required>
                     <label for="first_name" class="active">First Name</label>
-                    <small v-if="form.valid.first_name" class="validate invalid"> {{form.valid.first_name}} </small>
+                    <small v-if="form.validations.fields.first_name"> {{form.validations.fields.first_name}} </small>
                 </div>
 
-                <div class="input-field col s12 l6">
-                    <input v-model="form.data.last_name" type="text" class="validate" required>
+                <div class="input-field  myInput-field">
+                    <input v-model="form.data.last_name" type="text" required>
                     <label for="last_name" class="active" >Last Name</label>
-                    <small v-if="form.valid.last_name" class="validate invalid"> {{form.valid.last_name}} </small>
+                    <small v-if="form.validations.fields.last_name"> {{form.validations.fields.last_name}} </small>
                 </div>
             </div>
             
             <div class="row">
-                <div class="input-field col s12 l6">
-                    <input v-model="form.data.email" type="email" class="validate" required >
+                <div class="input-field  myInput-field">
+                    <input v-model="form.data.email" type="email" required >
                     <label for="email" class="active">Email</label>
-                    <small v-if="form.valid.email" class="validate invalid"> {{form.valid.email}} </small>
+                    <small v-if="form.validations.fields.email"> {{form.validations.fields.email}} </small>
                 </div>
 
-                 <div class="input-field col s12 l6">
+                 <div class="input-field  myInput-field">
 
-                    <select v-model="form.data.gender" class="validate" required >
+                    <select v-model="form.data.gender" required >
                         <option value="" >Choose your Gender</option>
                         <option value="male" :selected="form.data.gender == 'male'" >Male</option>
                         <option value="female" :selected="form.data.gender == 'female'">Female</option>
                     </select>   
                     
                     <label for="gender" class="active" >Gender</label>
-                    <small v-if="form.valid.gender" class="validate invalid"> {{form.valid.gender}} </small>
+                    <small v-if="form.validations.fields.gender"> {{form.validations.fields.gender}} </small>
 
                 </div>
+
+
+
                 
             </div>
 
 
-            <p v-if="form.message.text" class="MyCentered frow validate invalid"  :class="[form.messge.class ? 'green' : 'red']" > {{form.message.text}} </p>
+            <p v-if="form.validations.message" class="MyCentered frow validate invalid row col s10 offset-s1 m8 offset-m2 l6 offset-l3"  :class="[form.validations.success != false ? 'green-text' : 'red-text']" > {{form.validations.message}} </p>
 
             <div class="row col s12 MyCentered frow">
                 <button type="button" class="waves-effect waves-light btn-small grey col" 
-                 @click.prevent="$router.go(-1)" >Back</button>
+                 @click.prevent="back()" ><i class="material-icons left sidenav-trigger" data-target="slide-out"  >arrow_back</i>Back</button>
 
-                <button type="button" class="waves-effect waves-light btn-small col green"
-                @click.prevent="save()" >Save</button>
+                <button type="button" class="waves-effect waves-light btn-small col red lighten-2"
+                @click.prevent="save()" > <i class="material-icons left sidenav-trigger" data-target="slide-out"  >done</i> Save</button>
             </div>
 
             
@@ -89,14 +91,15 @@ export default {
                     last_name: '',
                     gender: '',
                     _links: {
-                        avatar: {href: 'img/avatar.png'}
+                        avatar: { href: ''}
                     }
                 },
-                valid: {},
-                message: {
-                    text: '',
-                    class: ''
-                },
+                
+                validations :{
+                    success: false,
+                    message : '',
+                    fields:{}
+                }
             }   
         }
     },
@@ -105,28 +108,44 @@ export default {
     
         if( this.type == 'update'){
             this.form.data = await this.$store.dispatch("find", this.$route.params.id )
-            if( this.form.data._links.avatar.href == null ){
-                this.form.data._links.avatar.href = 'img/avatar.png'
-            }
         }else{
             this.form.data = {}
         }
     },
 
     methods: {
+
+        back: function(){
+            this.$store.dispatch('navegation','back')
+        }, 
+
         save: async function(){
             let response = await this.$store.dispatch('userCrud',{type: this.type.toLowerCase(),form: this.form.data})
-            console.log(response)
-            this.form.message.class = response._meta.success
+            this.setValidations(response)
+        },
 
+        setValidations: function(response){
+            this.form.validations.success = response._meta.success
             if(!response._meta.success){
                 for( let i=0; i < response.result.length; i++ ){
-                    this.form.valid[response.result[i].field] = response.result[i].message
+                    this.form.validations.fields[response.result[i].field] = response.result[i].message
                 }
-                this.form.message.text = response._meta.message
+                this.form.validations.message = response._meta.message
             }else{
-                this.form.valid = false
-                this.form.message.text = 'Saved successfully!'
+                this.form.validations.fields = {}
+                this.form.validations.message = 'Saved successfully!'
+                setTimeout(() =>{}, 3000)
+
+                let time = 5
+                let interval = setInterval(()=>{
+                    let s = (time > 1) ? 's' : ''
+                    this.form.validations.message = 'Returning to the previous page in '+time+' second'+s+'...'
+                    time--
+                    if ( time == 0) {    
+                        clearInterval(interval)
+                        this.back() 
+                    }
+                },1000)
             } 
         }
     }

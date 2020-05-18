@@ -10,7 +10,7 @@
 
        
         
-        <table class="col s12 l8 offset-l2 highlight  table" >
+        <table class="col s12 l8 offset-l2 highlight centered table" >
                 <thead>
                 <tr>
                     <th>Profile</th>
@@ -29,7 +29,7 @@
                   
                     <td > 
                         <div class="chip"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" >
-                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png'" alt="Contact Person">
+                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
                             <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
                         </div>
                     </td>
@@ -107,13 +107,12 @@ export default {
     },
 
     mounted: function(){
-        let page = 1 ;
+        //let page = 'last' ;
        if( this.$route.params.page ){
-            page = this.$route.params.page
-        }else{
-            page = this.meta.currentPage
+            //page = this.$route.params.page
         }
-        this.$store.dispatch('all', page) 
+
+        this.$store.dispatch('all') 
     },
     methods:{
     
