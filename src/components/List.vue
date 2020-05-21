@@ -12,14 +12,14 @@
         
         <table class="col s12 l8 offset-l2 highlight centered table" >
                 <thead>
-                <tr>
-                    <th>Profile</th>
-                    <th class="hide-on-large-only">Name</th>
-                    <th class="hide-on-med-and-down">Gender</th>
-                    <th class="hide-on-med-and-down" >Email</th>
-                     <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th><i class="material-icons">account_circle</i> </th>
+                        <th class=""><fontawesome icon="edit" /> Name</th>
+                        <th class="hide-on-med-and-down" ><fontawesome icon="envelope" /> Email</th>
+                        <th class="hide-on-med-and-down"> <fontawesome icon="venus-mars" /> Gender</th>
+                        <th class="hide-on-med-and-down"> <fontawesome icon="toggle-on" /> Status</th>
+                        <th class="hide-on-med-and-down" ><fontawesome icon="user-cog" /> Actions</th>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -27,36 +27,37 @@
 
                 <tr v-for="user in list" :key="user.id" class="row" >
                   
-                    <td > 
-                        <div class="chip"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" >
-                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
-                            <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
-                        </div>
-                    </td>
-
-                     <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" > 
-                        <p>{{user.first_name | capitalize }}</p>
-                    </td>
-
                 
-                     <td class="hide-on-med-and-down" > 
-                        <p>{{user.gender | capitalize }}</p>
+                    <td> 
+                        <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
+                    </td>
+
+                    <td class=""  > 
+                        <a :href="'#/users/profile/'+user.id">
+                        {{user.first_name | capitalize }} 
+                        {{user.last_name | capitalize }}
+                        </a>
                     </td>
 
                     <td class="hide-on-med-and-down" > 
                         <p>{{user.email}}</p>
                     </td>
+                
+                     <td class="hide-on-med-and-down" > 
+                        <p>{{user.gender | capitalize }}</p>
+                    </td>
 
-                    <td class="switch"  >
+
+                    <td class="switch hide-on-med-and-down"  >
                         <label>
                         <input @change.prevent="statusUser(user)"  type="checkbox" :checked="(user.status === 'active') ? true : false" >
                         <span class="lever"></span>
                         </label>
                     </td>
 
-                    <td class="actions" > 
+                    <td class="actions hide-on-med-and-down" > 
                         <div class="col">
-                            <a title="Edit User" @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
+                            <a title="Edit User" :href="'#/users/edit/'+user.id" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
                             <a title="Delete User" @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
                         </div>
                     </td>

@@ -1,48 +1,28 @@
 <template>
   <div id="app" class="row">
-
-    <!-- Dropdown Structure -->
-    <ul id="manu-dropdown" class="dropdown-content">
-      <li><a href="#!">Back</a></li>
-      <li class="divider"></li>
-      <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>
-      <li><a title="List All" @click.prevent="$store.dispatch('navegation', '/')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
-    </ul>
-
-    <nav class="row col l12 m12 s12 myHeader" >
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Fake App</a>
-
-        <ul class="right">
-          <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>
-          <li><a title="List All" @click.prevent="$store.dispatch('navegation', '/')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
-        </ul>
-        
-      </div>
-    </nav>
-
-
+    
+    <NavBar /> 
+    <Menu /> 
 
     <div class="row col l12 m12 s12 myMain">
-      <Menu />
       <router-view class="row col l12 m12 s12" />
     </div>
 
-    
-
     <div class="row col myFooter">
 
-
     </div>
+
   </div>
 </template>
 
 <script>
 
+import NavBar from './components/NavBar'
 import Menu from './components/Menu'
 export default {
   name: 'App',
   components:{
+    NavBar,
     Menu
   },
 }

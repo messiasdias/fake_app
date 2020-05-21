@@ -1,5 +1,5 @@
 import modUser from './user' 
-import router from './../router'
+import router from './../routes/router'
 import $ from 'jquery'
 
 let state = {

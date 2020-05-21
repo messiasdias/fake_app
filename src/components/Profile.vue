@@ -13,7 +13,7 @@
                 <div class="card-image">
                 <img class="circle" :src="user._links.avatar.href">
                 <span class="card-title"> {{user.first_name}} {{user.last_name}} </span>
-                <a @click.prevent="$store.dispatch('navegation','/edit/'+user.id)" class="btn-floating halfway-fab waves-effect waves-light blue lighten-1"><i class="material-icons">edit</i></a>
+                <a :href="'#/users/edit/'+user.id" class="btn-floating halfway-fab waves-effect waves-light blue lighten-1"><i class="material-icons">edit</i></a>
                 
                 </div>
 

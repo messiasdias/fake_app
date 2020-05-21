@@ -60,7 +60,7 @@
                 <button type="button" class="waves-effect waves-light btn-small grey col" 
                  @click.prevent="back()" ><i class="material-icons left sidenav-trigger" data-target="slide-out"  >arrow_back</i>Back</button>
 
-                <button type="button" class="waves-effect waves-light btn-small col red lighten-2"
+                <button type="button" class="waves-effect waves-light btn-small col primary lighten-2"
                 @click.prevent="save()" > <i class="material-icons left sidenav-trigger" data-target="slide-out"  >done</i> Save</button>
             </div>
 

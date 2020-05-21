@@ -33,7 +33,7 @@
 }
 
 html{
-    @include scrollbar($color1, $black2, $black2, 5px);
+    @include scrollbar($primary-color, $black2, $black2, 5px);
 }
 
 body{
@@ -56,35 +56,64 @@ body{
 
 
 .myHeader {
+
     position: fixed;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
     height: 65px !important;
-    padding: 0px 20px;
+    width: 100% !important;
     z-index: 2;
     margin: 0 !important;
     background: $primary-color !important;
+    user-select: none !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+
+    a, ul > li > a{ 
+        position: relative !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 20px !important;
+        margin: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover{
+            transition: all ease-in-out .6s ;
+            cursor: pointer;
+            background-color: lighten($primary-color, 10%);
+        }
+    }
 
     ul{
         padding: 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
          li{
+             
             padding: 0px !important;
-            a{
-                padding: 0px !important;
-                margin: 0;
-            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
          }
     }
 }
 
 
 .myMain{
-
-    margin-top: 60px !important;
+    margin-top: 65px !important;
     min-width:  100vw !important;
     padding: 0 !important;
+   
 
 
     h1, h2, h3, h4, h5{
-        color: #ccc;
+        color: lighten( $primary-color, 20%);
     }
 
     .list-top{
@@ -106,12 +135,6 @@ body{
         justify-content: center;
         align-items: flex-end;
         flex-direction: column;
-
-        .pagination{
-            padding: 20px ;
-            display: inline-flex;
-            justify-content: flex-end;
-        }
     }
 
     .table{
@@ -121,7 +144,7 @@ body{
         }
 
         tbody{
-            @include scrollbar($color1, $black2, $black2, 5px);
+            @include scrollbar($primary-color, $black2, $black2, 5px);
             width: 250vh !important;
         }
 
@@ -129,37 +152,6 @@ body{
             padding: 0 !important;
         }
        
-
-        .chip {
-            display: inline-flex;
-            height:  45px !important;
-            justify-content: center;
-            align-items: center;
-            margin: 0 !important;
-            padding: 0 !important;
-            text-align: center;
-            cursor: pointer;
-            transition: all ease-in-out .8s;
-
-            img{
-                width: 40px;
-                height: 40px;
-                margin: 0 !important;
-                margin-left: 2px !important;
-            }
-
-            p{
-                line-height: 12px !important;
-                margin: 5px 10px;
-                transition: all ease-in-out .8s;
-            }
-
-            &:hover{
-                transition: all ease-in-out .8s;
-                background-color: rgba($color1, .3);
-            }
-
-        }
 
         .actions {
             display: flex;
@@ -193,7 +185,7 @@ body{
 
 
     .input-field > .invalid{
-        color: $color1 !important;
+        color: $primary-color !important;
     }
 
 }
@@ -307,4 +299,119 @@ body{
     & > small{
         @extend .validate, .invalid;
     }
+}
+
+
+.myDropdown-menu{
+    //border: solid 1px red
+    //@extend .dropdown-content;
+    position: fixed;
+    top: 65px !important;
+    right: 0px !important; 
+    width: 200px;
+    min-height: 100% !important;
+    background-color: #ccc; 
+    outline: none !important; 
+    z-index: 200 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column !important;
+    display: none;
+
+
+    & > li{
+        padding: 0 !important;
+        height: 65px;  
+        
+        & ~ .divider{
+            height: 2px !important; 
+        }
+        
+        a{  
+            color: white;
+            display: flex;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+            height: 100% !important;
+            padding: 0 !important;
+
+            svg , i{
+                align-self: center !important;
+                padding: 0 !important;
+                @extend .left;
+            }
+
+            &:hover{
+                background-color: lighten($primary-color,10%); 
+            }
+            &:focus{
+                outline: none !important;
+            }
+        }
+
+        &:hover{
+            background-color: lighten($primary-color,10%); 
+            cursor: pointer;
+        }
+    }
+
+
+}
+
+.dashborad-top-card-container{
+    @extend .row, .container, .col, .s12, .m12, .l12;
+    padding: 20px !important;
+
+    .card{
+        @extend .col, .s12, .m5, .offset-m1, .l3, .offset-l1;
+        padding: 20px !important;
+        border-radius: 6px;
+
+        &-header,  &-body, &-footer {
+            padding: 10px;
+        }
+
+        &-header{
+            & > h1 {
+                font-size: 2em !important;
+                margin: 0 !important;
+            }
+
+            p{
+                font-size: 14px;
+                color: $lighter;
+            }
+        }
+
+        &-body{
+            p { color: rgba(black, .6) !important;  }
+        }
+
+        &-footer{
+            p {font-size: 12px; opacity: .6;}
+        }
+
+    }
+
+
+    @each $name, $value in $myColors {
+        .card-#{$name} {
+            background-color: $value !important;
+            .card-header, .card-body, .card-footer{
+                p { color: #ccc !important;}
+            }
+
+            .card-header{
+                h1{ color: white !important; }
+            }
+
+            .card-body{
+                p { color: rgba(black, .6) !important;  }
+            }
+
+        }
+    } 
+
 }
