@@ -1,5 +1,5 @@
 <template>
-<ul id="slide-out" class="sidenav">
+<ul id="slide-out" class="sidenav" >
     
     <a class="sidenav-close"><i class="material-icons">close</i></a>
  

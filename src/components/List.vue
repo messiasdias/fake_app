@@ -15,8 +15,8 @@
                     <tr>
                         <th><i class="material-icons">account_circle</i> </th>
                         <th class=""><fontawesome icon="edit" /> Name</th>
-                        <th class="" ><fontawesome icon="envelope" /> Email</th>
-                        <th class=""> <fontawesome icon="venus-mars" /> Gender</th>
+                        <th class="hide-on-med-and-down" ><fontawesome icon="envelope" /> Email</th>
+                        <th class="hide-on-med-and-down"> <fontawesome icon="venus-mars" /> Gender</th>
                         <th class=""> <fontawesome icon="toggle-on" /> Status</th>
                         <th class="" ><fontawesome icon="user-cog" /> Actions</th>
                     </tr>
@@ -39,11 +39,11 @@
                         </a>
                     </td>
 
-                    <td class="" > 
+                    <td class="hide-on-med-and-down" > 
                         <p>{{user.email}}</p>
                     </td>
                 
-                     <td class="" > 
+                     <td class="hide-on-med-and-down" > 
                         <p>{{user.gender | capitalize }}</p>
                     </td>
 

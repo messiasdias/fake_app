@@ -25,7 +25,7 @@ export default {
   beforeCreate: function() {
     materialize.AutoInit()
     document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.sidenav');
+      var elems = document.querySelectorAll('.sidenav#slide-out');
       materialize.Sidenav.init(elems,{edge:'right'});
     }); 
   }
