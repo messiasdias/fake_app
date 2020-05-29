@@ -169,3 +169,28 @@ table{
         background-color: $primary-color !important;
     }
 }
+
+
+.sidenav-close {  
+    @extend .waves-effect; 
+    position: absolute;
+    width: 45px !important;
+    height: 45px !important;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+
+    
+    i{ 
+        color: white !important;
+        font-size: 2em !important;
+    }
+}
+
+

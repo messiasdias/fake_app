@@ -8,15 +8,11 @@
       <router-view class="row col l12 m12 s12" />
     </div>
 
-    <div class="row col myFooter">
-
-    </div>
-
   </div>
 </template>
 
 <script>
-
+import materialize from 'materialize-css'
 import NavBar from './components/NavBar'
 import Menu from './components/Menu'
 export default {
@@ -25,5 +21,14 @@ export default {
     NavBar,
     Menu
   },
+
+  beforeCreate: function() {
+    materialize.AutoInit()
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      materialize.Sidenav.init(elems,{edge:'right'});
+    }); 
+  }
+
 }
 </script>

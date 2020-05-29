@@ -1,6 +1,8 @@
 <template>
-<ul id="slide-out" class="sidenav sidenav-right">
+<ul id="slide-out" class="sidenav">
     
+    <a class="sidenav-close"><i class="material-icons">close</i></a>
+ 
     <li>
         <div class="user-view">
             <div class="background">
@@ -33,6 +35,5 @@ export default {
             menu: state => state.menu,
         }),
     },
-
 }
 </script>

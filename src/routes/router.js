@@ -16,7 +16,6 @@ let router =  {
 //Add Routes file objects
 router.append(Home)
 router.append(User)
-console.log(router.routes)
 
 //New VueRouter
 let Router =  new VueRouter(router)

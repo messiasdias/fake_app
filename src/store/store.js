@@ -1,19 +1,18 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
 import modUser from './user' 
 import router from './../routes/router'
 import $ from 'jquery'
 
+let api = {
+    access_token: process.env.VUE_APP_API_TOKEN,
+    url : process.env.VUE_APP_API_URL
+}
+
 let state = {
-    api : {
-        //access_token: process.env.API_TOKEN,
-        //url : process.env.API_URL
-        //Temporario
-        access_token: 'OFTmOE-ksyOYl0aIDCZvGAWPzfCJPfRV4zm8',
-        url : 'https://gorest.co.in/public-api'
-    },
     navegation: 'list',
     menu: false,   
 }
-
 
 let mutations = {
     navegation: function(state, navegation){
@@ -47,12 +46,9 @@ let actions = {
       
         let ajaxconfig = {
             method: config.method ? config.method.toUpperCase() : "GET" ,
-            url: context.state.api.url + config.url,
+            url: api.url + config.url,
             data: config.formdata ? config.formdata : {}, 
-            headers:  { Authorization: 'Bearer '+context.state.api.access_token },
-            success : function(response){
-                return response
-            },
+            headers:  { Authorization: 'Bearer '+api.access_token },
         } 
         
         let ajaxResponse =  await $.ajax(ajaxconfig).then( (response) => {
@@ -66,7 +62,7 @@ let actions = {
 
 
 
-export default {
+let Store =  {
     state:state,
     actions:actions,
     mutations:mutations,
@@ -74,3 +70,7 @@ export default {
         user:modUser
     }
 }
+
+
+Vue.use(Vuex)
+export default new Vuex.Store(Store)

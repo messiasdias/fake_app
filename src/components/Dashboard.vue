@@ -1,6 +1,6 @@
 <template>
     <div class="row col s12">
-        
+
         <div class="dashborad-top-card-container">
 
             <div class="card card-color3" >
@@ -19,8 +19,9 @@
                 </div>
             </div>
 
-            <div class="card card-color4" >
-               
+
+
+            <div class="card" >
                 <div class="card-header">
                     <h1>Card Title</h1>
                     <p>Card SubTitle</p>
@@ -34,28 +35,8 @@
                 <div class="card-footer">
                     <p>Card Footer</p>
                 </div>
-
             </div>
-
-
-            <div class="card card-color5" >
-                
-                <div class="card-header">
-                    <h1>Card Title</h1>
-                    <p>Card SubTitle</p>
-                </div>
-
-                <div class="card-body">
-                    <p>Card Body</p>
-                </div>
-                
-
-                <div class="card-footer">
-                    <p>Card Footer</p>
-                </div>
-                
-            </div>
-
+            
         </div>
 
       

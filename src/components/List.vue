@@ -15,10 +15,10 @@
                     <tr>
                         <th><i class="material-icons">account_circle</i> </th>
                         <th class=""><fontawesome icon="edit" /> Name</th>
-                        <th class="hide-on-med-and-down" ><fontawesome icon="envelope" /> Email</th>
-                        <th class="hide-on-med-and-down"> <fontawesome icon="venus-mars" /> Gender</th>
-                        <th class="hide-on-med-and-down"> <fontawesome icon="toggle-on" /> Status</th>
-                        <th class="hide-on-med-and-down" ><fontawesome icon="user-cog" /> Actions</th>
+                        <th class="" ><fontawesome icon="envelope" /> Email</th>
+                        <th class=""> <fontawesome icon="venus-mars" /> Gender</th>
+                        <th class=""> <fontawesome icon="toggle-on" /> Status</th>
+                        <th class="" ><fontawesome icon="user-cog" /> Actions</th>
                     </tr>
                 </thead>
 
@@ -39,23 +39,23 @@
                         </a>
                     </td>
 
-                    <td class="hide-on-med-and-down" > 
+                    <td class="" > 
                         <p>{{user.email}}</p>
                     </td>
                 
-                     <td class="hide-on-med-and-down" > 
+                     <td class="" > 
                         <p>{{user.gender | capitalize }}</p>
                     </td>
 
 
-                    <td class="switch hide-on-med-and-down"  >
+                    <td class="switch"  >
                         <label>
                         <input @change.prevent="statusUser(user)"  type="checkbox" :checked="(user.status === 'active') ? true : false" >
                         <span class="lever"></span>
                         </label>
                     </td>
 
-                    <td class="actions hide-on-med-and-down" > 
+                    <td class="actions" > 
                         <div class="col">
                             <a title="Edit User" :href="'#/users/edit/'+user.id" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
                             <a title="Delete User" @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
