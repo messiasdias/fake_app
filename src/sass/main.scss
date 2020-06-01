@@ -106,11 +106,10 @@ body{
 
 
 .myMain{
-    margin-top: 65px !important;
-    min-width:  100vw !important;
+    @extend .row, .col, .s12;
+    margin-top: 80px !important;
     padding: 0 !important;
    
-
 
     h1, h2, h3, h4, h5{
         color: lighten( $primary-color, 20%);
@@ -152,23 +151,22 @@ body{
             padding: 0 !important;
         }
        
-
-        .actions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-
-            a{
-                margin: 5px;
-            }
-
-            div{
-                margin: 5px !important;
-            }
-        }
     }
 
+    .actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+
+        a{
+            margin: 5px;
+        }
+
+        div{
+            margin: 5px !important;
+        }
+    }
 
 
     .progress-content{
@@ -191,7 +189,7 @@ body{
 }
 
 
-.mySidebar{
+.mySideba{
     padding: 20px !important;
     background-color: #eee;
     min-height: 100vh !important;
@@ -202,35 +200,6 @@ body{
 .myContent{
     padding: 0px  !important;
     background-color: white;
-}
-
-
-.myMenu{
-    position: fixed;
-    right: 0;
-    width: 80px;
-    height: 100vh;
-    padding: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column !important;
-    background-color: #ccc;
-    padding-top: 20px;
-
-    
-    ul  {
-        display: inherit !important;
-        flex-direction: column;
-        align-items: center !important;
-        justify-content: center;
-
-
-        li a {
-            color: white;
-        }
-
-    }
 }
 
 

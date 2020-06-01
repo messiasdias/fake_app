@@ -30,6 +30,12 @@ let mutations = {
 
 
 let actions = {
+
+    delete: function(context, user){
+        alert('Delete errado!')
+        console.log(context, user)
+    },
+
     navegation: function(context, navegation){
 
         if( navegation.toLowerCase() == 'back' ){
@@ -63,9 +69,11 @@ let actions = {
 
 
 let Store =  {
+
     state:state,
     actions:actions,
     mutations:mutations,
+    
     modules: {
         user:modUser
     }

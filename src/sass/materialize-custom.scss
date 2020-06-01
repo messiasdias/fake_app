@@ -114,20 +114,23 @@ table{
 
 }
 
-.card-title{
-    font-weight: bold;
-    background-color: $primary-color;
-    padding: 10px !important;
-    bottom: 10px !important;
-    left: 10px !important;
-
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
+.card{
+    box-shadow: none !important;
 }
 
 
-.badge, .btn, .card-title{
+.card-title{
+    //font-size: 20px !important;
+    font-weight: bold;
+    //background-color: $primary-color;
+    text-align: center;
+    padding: 10px !important;
+    position: relative !important ;
+    color: $primary-color !important;
+}  
+
+
+.badge {
     border-radius: 50px;
 }
 
@@ -161,12 +164,13 @@ table{
 }
 
 .pagination{
-    padding: 20px ;
-    display: inline-flex;
-    justify-content: flex-end;
+    padding: 20px !important ;
+    //display: inline-flex;
+    //justify-content: flex-end;
+    position: relative !important;
     
     ul > li .acitve{
-        background-color: $primary-color !important;
+        //background-color: $primary-color !important;
     }
 }
 
@@ -192,5 +196,4 @@ table{
         font-size: 2em !important;
     }
 }
-
 

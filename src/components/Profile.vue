@@ -1,14 +1,10 @@
 <template>
     <div class="row col s12" style="margin-top: 50px;">
 
-        <div class="row col s12 MyCentered">
-            <h3 class="card-title2">{{user.first_name}} {{user.last_name}}</h3>
-        </div>
-
 
           <div class="row col s12 ">
             <div class="col s12 offset-m2 m8 l6 offset-l3">
-            <div class="card ">
+            <div class="card horizontal">
 
                 <div class="card-image">
                 <img class="circle" :src="user._links.avatar.href">

@@ -2,15 +2,15 @@
     <div class="row table-container">
 
         <div class="MyCentered">
-            <h4 class="">User {{type}}</h4>
+            <h4 class="">User {{type | capitalize}}</h4>
         </div>
  
-        <form v-if="type == 'update'" action="" class="MyCentered" >
+        <div v-if="type == 'update'" action="" class="MyCentered" >
             <img  class="responsive-img s12 push-s6 circle" :src="form.data._links.avatar.href">
-        </form>
+        </div>
 
 
-        <form class="col s10 offset-s1 l8 offset-l2" >
+        <form class="col s12" >
 
             
             <div class="row">
@@ -58,10 +58,10 @@
 
             <div class="row col s12 MyCentered frow">
                 <button type="button" class="waves-effect waves-light btn-small grey col" 
-                 @click.prevent="back()" ><i class="material-icons left sidenav-trigger" data-target="slide-out"  >arrow_back</i>Back</button>
+                 @click.prevent="this.$store.dispatch('navegation','back')" ><i class="material-icons left sidenav-trigger" data-target="slide-out"  >arrow_back</i>Back</button>
 
                 <button type="button" class="waves-effect waves-light btn-small col primary lighten-2"
-                @click.prevent="save()" > <i class="material-icons left sidenav-trigger" data-target="slide-out"  >done</i> Save</button>
+                @click.prevent="$store.dispatch('user/save',{type: type ,form: form.data})" > <i class="material-icons left sidenav-trigger" data-target="slide-out"  >done</i> Save</button>
             </div>
 
             
@@ -71,7 +71,7 @@
     </div>
 </template>
 <script>
-import $ from 'jquery'
+//import $ from 'jquery'
 import materialize from 'materialize-css'
 import {mapState} from 'vuex'
 export default {
@@ -108,22 +108,13 @@ export default {
         materialize.AutoInit()
     
         if( this.type == 'update'){
-            this.form.data = await this.$store.dispatch("find", this.$route.params.id )
+            this.form.data = await this.$store.dispatch("user/find", this.$route.params.id )
         }else{
             this.form.data = {}
         }
     },
 
     methods: {
-
-        back: function(){
-            this.$store.dispatch('navegation','back')
-        }, 
-
-        save: async function(){
-            let response = await this.$store.dispatch('userCrud',{type: this.type.toLowerCase(),form: this.form.data})
-            this.setValidations(response)
-        },
 
         setValidations: function(response){
             this.form.validations.success = response._meta.success
@@ -135,26 +126,8 @@ export default {
             }else{
                 this.form.validations.fields = {}
                 this.form.validations.message = 'Saved successfully!'
-                setTimeout(() =>{}, 3000)
-
-                let time = 5
-                let interval = setInterval(()=>{
-                    let s = (time > 1) ? 's' : ''
-                    this.form.validations.message = 'Returning to the previous page in '+time+' second'+s+'...'
-                    
-
-                    $('#app').click(function() {
-                        clearInterval(interval)
-                        this.form.validations.message = ''
-                        console(this)
-                    })
-                 
-                    time--
-                    if ( time == 0) {    
-                        clearInterval(interval)
-                        this.back() 
-                    }
-                },1000)
+                setTimeout(() =>{}, 2000)
+                this.$store.dispatch('navegation','back')
             } 
         }
     }

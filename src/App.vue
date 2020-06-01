@@ -4,31 +4,44 @@
     <NavBar /> 
     <Menu /> 
 
-    <div class="row col l12 m12 s12 myMain">
-      <router-view class="row col l12 m12 s12" />
+
+    <div class="myMain">
+
+      <!--Left-->
+      <router-view class="col s12 l8" />
+
+       <!--Right-->
+       <SideBar class="col s12 l4" /> 
+
     </div>
 
   </div>
 </template>
 
 <script>
-import materialize from 'materialize-css'
+import {mapState} from 'vuex'
+//import materialize from 'materialize-css'
 import NavBar from './components/NavBar'
 import Menu from './components/Menu'
+import SideBar from './components/SideRight'
+
 export default {
   name: 'App',
   components:{
     NavBar,
-    Menu
+    Menu,
+    SideBar
   },
 
   beforeCreate: function() {
-    materialize.AutoInit()
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.sidenav#slide-out');
-      materialize.Sidenav.init(elems,{edge:'right'});
-    }); 
-  }
+    this.$store.dispatch('user/all', 'last')
+  },
+  computed: {
+        ...mapState({
+          meta : state => state.user.meta,
+          list : state => state.user.list,
+        })
+    },
 
 }
 </script>

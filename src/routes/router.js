@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './home'
 import User from './user'
+import materialize from 'materialize-css'
 
 let router =  {
     mode: 'hash',
@@ -13,6 +14,7 @@ let router =  {
     }
 }
 
+
 //Add Routes file objects
 router.append(Home)
 router.append(User)
@@ -20,5 +22,17 @@ router.append(User)
 //New VueRouter
 let Router =  new VueRouter(router)
 Vue.use(VueRouter)
+
+
+
+Router.beforeEach((to, from, next) => {
+    materialize.AutoInit()
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      materialize.Sidenav.init(elems,{edge:'right'});
+    }); 
+
+    next()
+})
 
 export default Router
