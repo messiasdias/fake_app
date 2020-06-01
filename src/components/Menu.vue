@@ -1,13 +1,15 @@
 <template>
-<ul id="slide-out" class="sidenav sidenav-right">
+<ul id="slide-out" class="sidenav" >
     
+    <a class="sidenav-close"><i class="material-icons">close</i></a>
+ 
     <li>
         <div class="user-view">
             <div class="background">
                 <img src="img/background.jpeg">
             </div>
             <a href="#user"><img class="circle" src="img/avatar-f1.png"></a>
-            <a href="#name"><span class="white-text name">John Doe</span></a>
+            <a href="#name"><span class="white-text name">Marie Lee</span></a>
             <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
         </div>
     </li>
@@ -33,6 +35,5 @@ export default {
             menu: state => state.menu,
         }),
     },
-
 }
 </script>

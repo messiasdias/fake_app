@@ -44,7 +44,8 @@ let actions = {
         let getPage = (page == 'last') ?  10101010 : page
         let response = await context.dispatch('ajax', {
             url :'/users?page='+getPage
-        }) 
+        }, { root: true }) 
+
         context.state.list = response.result.reverse()
         context.state.meta = response._meta
     },
@@ -52,7 +53,7 @@ let actions = {
     find : async function(context, id){
         let response = await context.dispatch('ajax', {
             url : '/users/'+id,
-        })
+        }, {root:true})
 
         if(response.result._links.avatar.href == null){
             response.result._links.avatar.href = actions.getAvatar(context,response.result.gender)
@@ -62,7 +63,42 @@ let actions = {
         return response.result
     },
 
-    userCrud : async function(context,crud){
+
+    save: async function(context, args ){
+        let response = await context.dispatch('crud',{type: args.type.toLowerCase(),form: args.form})
+        this.setValidations(response)
+    },
+
+    status: async function(context,user) {
+        let response = await context.dispatch(
+            'crud',
+            { 
+                type: 'update',
+                form :{ 
+                    id: user.id,
+                    status: (user.status === 'active') ? 'inactive': 'active'
+                } 
+            }
+        )
+
+        if(response._meta.success){
+            let userUpdated = await context.dispatch("find", user.id )
+            context.commit('listUpdate', userUpdated )
+        }
+    },
+
+
+    delete : async function(context, user ) {
+        let result = confirm("Delete User "+user.first_name+"?") 
+        if(result){
+            let response = await context.dispatch('crud', { type:'delete', form:user} )
+            if(response._meta.success){
+                context.commit('listRemove', user)
+            }
+        } 
+    },
+
+    crud : async function(context,crud){
         let url = '/users'
         let method = 'POST'
        
@@ -84,7 +120,7 @@ let actions = {
             url : url,
             method: method,
             formdata: crud.form, 
-        }) 
+        }, { root: true }) 
 
        return response
 
@@ -102,6 +138,7 @@ let actions = {
 
 //exporting
 export default {
+    namespaced: true,
     state:state,
     actions:actions,
     mutations:mutations

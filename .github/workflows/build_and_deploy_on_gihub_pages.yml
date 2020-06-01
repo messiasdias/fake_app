@@ -1,0 +1,20 @@
+name: Build and Deploy on GitHub Pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run build --mode production
+      
+      - name: Deploy 🚀
+        run: npm run deploy
+        with:
+          VUE_APP_API_TOKEN: ${{ secrets.API_TOKEN }}
+          VUE_APP_API_URL: ${{ secrets.API_URL }}

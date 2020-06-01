@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "dev": "npm run serve",
+    "build-prod": "vue-cli-service build --mode production",
+    "build-dev": "vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+    "deploy": "npm run build-prod && push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -49,7 +51,12 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "vue/no-use-v-if-with-v-for":  ["error", {
+        "allowUsingIterationVar": true
+      }],
+      "no-console": "off"
+    },
     "overrides": [
       {
         "files": [
