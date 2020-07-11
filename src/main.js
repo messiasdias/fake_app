@@ -1,14 +1,13 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
-import Store from './store/store'
-import router from './router'
+import store from './store/store'
+import router from './routes/router'
 import App from './App.vue'
-import "./sass/main.scss"
-import "./dom.js"
+import FontAwesomeIcon  from "./fontawsome"
+import './sass/main.scss'
+import  './filters'
 
-Vue.use(Vuex)
-let store = new Vuex.Store(Store)
 
+Vue.component('fontawesome',FontAwesomeIcon)
 new Vue({
   store,
   router,

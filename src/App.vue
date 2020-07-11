@@ -1,43 +1,47 @@
 <template>
   <div id="app" class="row">
-
-    <nav class="row col l12 m12 s12 myHeader" >
-      <div class="nav-wrapper">
-
-        <a href="#!" class="brand-logo">Fake App</a>
-
-
-        <ul class="right">
-          <li><a title="New" @click.prevent="$store.dispatch('navegation', '/new')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >add</i></a></li>
-          <li><a title="List All" @click.prevent="$store.dispatch('navegation', '/')" ><i class="material-icons right sidenav-trigger" data-target="slide-out"  >apps</i></a></li>
-        </ul>
-        
-      </div>
-    </nav>
-
-
-
-    <div class="row col l12 m12 s12 myMain">
-      <Menu />
-      <router-view class="row col l12 m12 s12" />
-    </div>
-
     
+    <NavBar /> 
+    <Menu /> 
 
-    <div class="row col myFooter">
 
+    <div class="myMain">
+
+      <!--Left-->
+      <router-view class="col s12 l8" />
+
+       <!--Right-->
+       <SideBar class="col s12 l4" /> 
 
     </div>
+
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+//import materialize from 'materialize-css'
+import NavBar from './components/NavBar'
 import Menu from './components/Menu'
+import SideBar from './components/SideRight'
+
 export default {
   name: 'App',
   components:{
-    Menu
+    NavBar,
+    Menu,
+    SideBar
   },
-  
+
+  beforeCreate: function() {
+    this.$store.dispatch('user/all', 'last')
+  },
+  computed: {
+        ...mapState({
+          meta : state => state.user.meta,
+          list : state => state.user.list,
+        })
+    },
+
 }
 </script>

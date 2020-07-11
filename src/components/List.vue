@@ -1,80 +1,85 @@
 <template>
 <div class="row col s12" >
 
-     <div v-if="$store.state.users.list != false" class="list-top">
-          <Pagination />
-    </div>   
     
+    <div v-if="list != false" class="card ">
+            
+        <div class="card-image" style="display:non;">
+            <span class="card-title">List</span>
+        </div>
+
+        <div  class="card-content">
+           
+           <div class="row">
+                <div class="col">
+                    <input type="text" placeholder="Search" name="search" v-model="search" >
     
-    <div v-if="$store.state.users.list != false"  class="col s12 l12 table-container" > 
+                </div> 
 
-       
-        
-        <table class="col s12 l8 offset-l2 highlight  table" >
-                <thead>
-                <tr>
-                    <th>Profile</th>
-                    <th class="hide-on-large-only">Name</th>
-                    <th class="hide-on-med-and-down">Gender</th>
-                    <th class="hide-on-med-and-down" >Email</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
+                <Pagination class="col" />
+           </div>
+            
+            <table class="highlight centered " >
+                    <thead>
+                        <tr>
+                            <th><i class="material-icons">account_circle</i> </th>
+                            <th class=""><fontawesome icon="edit" /> Name</th>
+                            <th class="hide-on-med-and-down" ><fontawesome icon="envelope" /> Email</th>
+                            <th class="hide-on-med-and-down"> <fontawesome icon="venus-mars" /> Gender</th>
+                            <th class=""> <fontawesome icon="toggle-on" /> Status</th>
+                            <th class="" ><fontawesome icon="user-cog" /> Actions</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                
+                    <tbody>
+                    
 
-                <tr v-for="user in $store.state.users.list" :key="user.id" class="row" >
-                  
-                    <td > 
-                        <div class="chip"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" >
-                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar-m1.png'" alt="Contact Person">
-                            <p class="hide-on-med-and-down" >{{user.first_name +' ' +user.last_name}}</p>
-                        </div>
-                    </td>
+                    <tr v-for="user in List" :key="user.id" class="row" >
+                    
+                    
+                        <td> 
+                            <img :src="user._links.avatar.href ? user._links.avatar.href : 'img/avatar.png'" alt="Contact Person">
+                        </td>
 
-                     <td class="hide-on-large-only"  @click.prevent="$store.dispatch('navegation', '/profile/'+user.id)" > 
-                        <p>{{user.first_name}}</p>
-                    </td>
+                        <td class=""  > 
+                            <a :href="'#/users/profile/'+user.id">
+                            {{user.first_name | capitalize }} 
+                            {{user.last_name | capitalize }}
+                            </a>
+                        </td>
 
-                
-                     <td class="hide-on-med-and-down" > 
-                        <p>{{user.gender}}</p>
-                    </td>
+                        <td class="hide-on-med-and-down" > 
+                            <p>{{user.email}}</p>
+                        </td>
+                    
+                        <td class="hide-on-med-and-down" > 
+                            <p>{{user.gender | capitalize }}</p>
+                        </td>
 
-                    <td class="hide-on-med-and-down" > 
-                        <p>{{user.email}}</p>
-                    </td>
 
-                    <td class="row actions" > 
-                        
-                        <!-- Switch -->
-                        <div class="switch col">
+                        <td class="switch"  >
                             <label>
-                            O
-                            <input @change.prevent="statusUser(user)"  type="checkbox" :checked="(user.status === 'active') ? true : false" >
+                            <input @change.prevent="$store.dispatch('user/status',user)"  type="checkbox" :checked="(user.status === 'active') ? true : false" >
                             <span class="lever"></span>
-                            I
                             </label>
-                        </div>
+                        </td>
 
-                   
-                        <div class="col">
-                            <a title="Edit User" @click.prevent="$store.dispatch('navegation', '/edit/'+user.id)" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
-                            <a title="Delete User" @click.prevent="deleteUser(user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
-                        </div>
-                    </td>
-                </tr>
+                        <td class="actions" > 
+                            <div class="col">
+                                <a title="Edit User" :href="'#/users/edit/'+user.id" class="btn-floating btn-small waves-effect waves-light blue lighten-1" > <i class="material-icons left">edit</i> </a>
+                                <a title="Delete User" @click.prevent="$store.dispatch('user/delete',user)" class="btn-floating btn-small waves-effect waves-light red lighten-1" > <i class="material-icons right">delete</i> </a>
+                            </div>
+                        </td>
+                    </tr>
 
-                </tbody>
-        </table>
+                    </tbody>
+            </table>
 
-
+        </div>
 
     </div>
 
-
-    <div v-else class="progress-content row col s12 m12 l12 " >
+    <div v-else class="MyCentered row col s12" style="height: 100vh !important;" >
            
         <div class="preloader-wrapper active">
             <div class="spinner-layer spinner-red-only">
@@ -97,51 +102,52 @@
     
 </template>
 <script>
+import {mapState} from 'vuex'
 import Pagination from './Pagination'
+
 export default {
     name : "List",
     components:{ Pagination },
-    mounted: function(){
-        let page = 1 ;
-        if( this.$route.params.page ){
-            page = this.$route.params.page
-        }else{
-            page = this.$store.state.users.meta.currentPage
-        }
-        this.$store.dispatch('getUsers', page)
-    },
-    methods:{
     
-         statusUser: async function(user) {
-            let response = await this.$store.dispatch(
-                'updateUser',
-                { id: user.id,
-                 status: (user.status === 'active') ? 'inactive': 'active'}
-            )
-
-            if(response._meta.success){
-                let userUpdated = await this.$store.dispatch("getUser", user.id )
-                this.$store.commit('usersListUpdate', userUpdated )
-            }
-        },
-
-        editUser: async function(user){
-           this.$store.dispatch('navegation', '/edit/'+user.id)
-        },
-
-
-        deleteUser: async function(user){
-            let result = confirm("Delete User "+user.first_name+"?") 
-
-            if(result){
-                let response = await this.$store.dispatch('deleteUser',user.id)
-                if(response._meta){
-                    this.$store.commit('usersListRemove', user)
-                }else{
-                    console.log(response._meta.message)
-                }
-            } 
+    data: function(){
+        return{
+            search: '',
         }
+    },
+
+     computed:{
+        ...mapState({
+          meta : state => state.user.meta,
+          list : state => state.user.list,
+        }),
+
+        List() {
+            let newList = []
+            if( this.search != '' ){
+                for(let i=0; i < this.list.length; i++ ){
+                    let item = this.list[i]
+
+                    if(item.first_name.toLowerCase().includes(this.search.toLowerCase()) |
+                       item.last_name.toLowerCase().includes(this.search.toLowerCase()) |
+                       item.email.toLowerCase().includes(this.search.toLowerCase()) ){
+                        newList.push(item)
+                    }
+                }
+            }else{
+                newList = this.list
+            }
+   
+            return newList
+        }
+    },
+
+    beforeMount: function(){
+        this.$store.dispatch('user/all', this.meta.currentPage ? this.meta.currentPage : 1 ) 
+        if(localStorage.getItem('search')) this.search = localStorage.getItem('search')
+    },
+
+    beforeDestroy: function(){
+        localStorage.setItem('search', this.search)
     }
 }
 </script>

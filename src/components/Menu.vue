@@ -1,15 +1,29 @@
 <template>
+<ul id="slide-out" class="sidenav" >
+    
+    <a class="sidenav-close"><i class="material-icons">close</i></a>
+ 
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="img/background.jpeg">
+            </div>
+            <a href="#user"><img class="circle" src="img/avatar-f1.png"></a>
+            <a href="#name"><span class="white-text name">Marie Lee</span></a>
+            <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div>
+    </li>
 
-<div style="display:none !important; "  class="myMenu"  >
+    <li><a href="#/"  ><i class="material-icons">dashboard</i>Dashboard</a></li>
 
-    <ul>
-        <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons  sidenav-trigger" data-target="slide-out"  >add</i></a></li>
-        <li><a href="#" @click.prevent="$store.commit('menu', true)" ><i class="material-icons  sidenav-trigger" data-target="slide-out"  >list</i></a> </li>
-    </ul>
-   
-</div> 
+    <!-- Users -->
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Users</a></li>
+    <li><a class="waves-effect" href="#/users/new" ><i class="material-icons">add</i> New</a></li>
+    <li><a class="waves-effect" href="#/users" > <i class="material-icons">list</i> List</a></li>
 
 
+</ul>
 </template>
 <script>
 import {mapState} from 'vuex'
@@ -21,6 +35,5 @@ export default {
             menu: state => state.menu,
         }),
     },
-
 }
 </script>

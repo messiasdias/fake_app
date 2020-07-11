@@ -1,0 +1,199 @@
+@charset "UTF-8";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "./variables.scss";
+
+// Color
+@import "./../../node_modules/materialize-css/sass/components/color-variables";
+@import "./../../node_modules/materialize-css/sass/components/color-classes";
+
+// Variables;
+@import "./../../node_modules/materialize-css/sass/components/variables";
+
+// Reset
+@import "./../../node_modules/materialize-css/sass/components/normalize";
+
+// components
+@import "./../../node_modules/materialize-css/sass/components/global";
+@import "./../../node_modules/materialize-css/sass/components/badges";
+@import "./../../node_modules/materialize-css/sass/components/icons-material-design";
+@import "./../../node_modules/materialize-css/sass/components/grid";
+@import "./../../node_modules/materialize-css/sass/components/navbar";
+@import "./../../node_modules/materialize-css/sass/components/typography";
+@import "./../../node_modules/materialize-css/sass/components/transitions";
+@import "./../../node_modules/materialize-css/sass/components/cards";
+@import "./../../node_modules/materialize-css/sass/components/toast";
+@import "./../../node_modules/materialize-css/sass/components/tabs";
+@import "./../../node_modules/materialize-css/sass/components/tooltip";
+@import "./../../node_modules/materialize-css/sass/components/buttons";
+@import "./../../node_modules/materialize-css/sass/components/dropdown";
+@import "./../../node_modules/materialize-css/sass/components/waves";
+@import "./../../node_modules/materialize-css/sass/components/modal";
+@import "./../../node_modules/materialize-css/sass/components/collapsible";
+@import "./../../node_modules/materialize-css/sass/components/chips";
+@import "./../../node_modules/materialize-css/sass/components/materialbox";
+@import "./../../node_modules/materialize-css/sass/components/forms/forms";
+@import "./../../node_modules/materialize-css/sass/components/table_of_contents";
+@import "./../../node_modules/materialize-css/sass/components/sidenav";
+@import "./../../node_modules/materialize-css/sass/components/preloader";
+@import "./../../node_modules/materialize-css/sass/components/slider";
+@import "./../../node_modules/materialize-css/sass/components/carousel";
+@import "./../../node_modules/materialize-css/sass/components/tapTarget";
+@import "./../../node_modules/materialize-css/sass/components/pulse";
+@import "./../../node_modules/materialize-css/sass/components/datepicker";
+@import "./../../node_modules/materialize-css/sass/components/timepicker";
+
+
+// Colors
+$teal : $color1 !important;
+$primary-color: $color1;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: $color3 !important;
+$secondary-color: $color2 !important ;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$link-color:  $primary-color !important;
+$badge-bg-color: $primary-color !important;
+$button-background-focus: lighten($sprimary-color, 4%) !default;
+$switch-bg-color: $primary-color !default;
+$switch-checked-lever-bg: desaturate(lighten($switch-bg-color, 25%), 25%) !default;
+
+
+// ==========================================================================
+
+table{
+
+    td, td > a {
+        color: $lighter !important;
+        padding: 0 !important;
+
+        img{
+            @extend .circle;
+            max-width: 40px;
+            margin: 5px;
+        }
+    }
+
+    thead > tr > th {
+        color: $lighter;
+        flex-direction: row;
+    }
+
+    .chip {
+        display: inline-flex;
+        height:  45px !important;
+        justify-content: center;
+        align-items: center;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center;
+        cursor: pointer;
+        transition: all ease-in-out .8s;
+        background: transparent !important;
+
+        img{
+            width: 40px;
+            height: 40px;
+            margin: 0 !important;
+            margin-left: 2px !important;
+        }
+
+        p{
+            line-height: 12px !important;
+            margin: 5px 10px;
+            transition: all ease-in-out .8s;
+            color: $primary-color;
+        }
+
+        &:hover{
+            transition: all ease-in-out .8s;
+            background-color: rgba($primary-color, .3);
+            color: initial;
+        }
+
+    }
+
+}
+
+.card{
+    box-shadow: none !important;
+}
+
+
+.card-title{
+    //font-size: 20px !important;
+    font-weight: bold;
+    //background-color: $primary-color;
+    text-align: center;
+    padding: 10px !important;
+    position: relative !important ;
+    color: $primary-color !important;
+}  
+
+
+.badge {
+    border-radius: 50px;
+}
+
+.user-view{
+
+    & .background {
+        background-color: $secondary-color; 
+
+        & > img {
+            width: 100% !important;
+            display: none;
+        }
+    }
+    
+}
+
+.switch{
+     & > .lever {
+        background-color: $primary-color;
+    }
+}
+
+
+.btn ~ .primary, .primary{
+    background-color: $primary-color !important;
+    color: white !important;
+}
+
+.btn ~ .secundary, .secundary{
+    background-color: $secondary-color !important;
+}
+
+.pagination{
+    padding: 20px !important ;
+    //display: inline-flex;
+    //justify-content: flex-end;
+    position: relative !important;
+    
+    ul > li .acitve{
+        //background-color: $primary-color !important;
+    }
+}
+
+
+.sidenav-close {  
+    @extend .waves-effect; 
+    position: absolute;
+    width: 45px !important;
+    height: 45px !important;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+
+    
+    i{ 
+        color: white !important;
+        font-size: 2em !important;
+    }
+}
+
