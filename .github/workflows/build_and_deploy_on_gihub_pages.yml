@@ -25,13 +25,14 @@ jobs:
       - name: Install and Build 🔧
         run: |
           npm install
-          npm run build 
+          npm run build
+        with:
+          VUE_APP_API_TOKEN: ${{ secrets.API_TOKEN }}
+          VUE_APP_API_URL: ${{ secrets.API_URL }}   
 
       - name: Deploy on Github Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
-          VUE_APP_API_TOKEN: ${{ secrets.API_TOKEN }}
-          VUE_APP_API_URL: ${{ secrets.API_URL }}   
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./dist
