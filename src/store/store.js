@@ -31,14 +31,10 @@ let mutations = {
 
 let actions = {
 
-    delete: function(context, user){
-        alert('Delete errado!')
-        console.log(context, user)
-    },
-
     navegation: function(context, navegation){
 
         if( navegation.toLowerCase() == 'back' ){
+            context.dispatch('user/all', 'last', { root: true })
             router.go(-1)
         }
 

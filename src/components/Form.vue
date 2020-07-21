@@ -47,9 +47,6 @@
                     <small v-if="form.validations.fields.gender"> {{form.validations.fields.gender}} </small>
 
                 </div>
-
-
-
                 
             </div>
 
@@ -58,10 +55,10 @@
 
             <div class="row col s12 MyCentered frow">
                 <button type="button" class="waves-effect waves-light btn-small grey col" 
-                 @click.prevent="this.$store.dispatch('navegation','back')" ><i class="material-icons left sidenav-trigger" data-target="slide-out"  >arrow_back</i>Back</button>
+                 @click.prevent="$store.dispatch('navegation','back')" ><i class="material-icons left sidenav-trigger"   >arrow_back</i>Back</button>
 
                 <button type="button" class="waves-effect waves-light btn-small col primary lighten-2"
-                @click.prevent="$store.dispatch('user/save',{type: type ,form: form.data})" > <i class="material-icons left sidenav-trigger" data-target="slide-out"  >done</i> Save</button>
+                @click.prevent="save(type,form)" > <i class="material-icons left sidenav-trigger"   >done</i> Save</button>
             </div>
 
             
@@ -71,7 +68,6 @@
     </div>
 </template>
 <script>
-//import $ from 'jquery'
 import materialize from 'materialize-css'
 import {mapState} from 'vuex'
 export default {
@@ -115,7 +111,10 @@ export default {
     },
 
     methods: {
-
+        save: async function(type, form){
+            let response = await this.$store.dispatch('user/save',{type: type ,form: form.data})
+            this.setValidations(response)
+        },
         setValidations: function(response){
             this.form.validations.success = response._meta.success
             if(!response._meta.success){
