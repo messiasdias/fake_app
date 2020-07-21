@@ -66,7 +66,7 @@ let actions = {
 
     save: async function(context, args ){
         let response = await context.dispatch('crud',{type: args.type.toLowerCase(),form: args.form})
-        this.setValidations(response)
+        return response
     },
 
     status: async function(context,user) {

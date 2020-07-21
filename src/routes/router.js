@@ -27,11 +27,6 @@ Vue.use(VueRouter)
 
 Router.beforeEach((to, from, next) => {
     materialize.AutoInit()
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.sidenav');
-      materialize.Sidenav.init(elems,{edge:'right'});
-    }); 
-
     next()
 })
 
